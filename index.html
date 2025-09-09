@@ -393,10 +393,16 @@
             container.className = 'image-container';
             container.setAttribute('data-image-id', imageId || '');
             
+            // Prepend GitHub raw URL if running on GitHub Pages
+            const baseURL = 'https://github.com/irvingd-directed/samples_catalogue/raw/main/';
+            const fullImagePath = window.location.hostname.includes('github.io') 
+                ? baseURL + imagePath 
+                : imagePath;
+            
             // Create thumbnail
             const thumb = document.createElement('img');
             thumb.className = 'image-thumb';
-            thumb.src = imagePath;
+            thumb.src = fullImagePath;
             thumb.alt = 'Product image';
             thumb.loading = 'lazy';
             
@@ -420,7 +426,7 @@
                     previewImg.onerror = function() {
                         preview.innerHTML = '<div style="color: red; padding: 10px;">Image not found</div>';
                     };
-                    previewImg.src = imagePath;
+                    previewImg.src = fullImagePath;
                 } else {
                     positionPreview(container, preview);
                 }
@@ -428,7 +434,7 @@
             
             // Click to open modal
             thumb.addEventListener('click', function() {
-                openModal(imagePath);
+                openModal(fullImagePath);
             });
             
             container.appendChild(thumb);
