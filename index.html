@@ -345,9 +345,9 @@
             data.forEach((row, index) => {
                 const tr = document.createElement('tr');
                 
-                // Add row number
+                // Add row number (start from 2 to match Excel)
                 const tdNum = document.createElement('td');
-                tdNum.textContent = index + 1;
+                tdNum.textContent = index + 2;
                 tr.appendChild(tdNum);
                 
                 // Add data cells, inserting images after Description
